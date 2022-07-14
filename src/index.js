@@ -1,9 +1,12 @@
-const check = (str) => {
-    const array = ['()', '[]', '{}', '||', '12', '34', '56', '77', '88'];
-    for (let i = 0; i < array.length; i++){
-        do {
-            array.forEach((item => str = str.replace(item, '')))
-        } while (str.includes(array[i]))
-    }
-    return str.length > 0 ? false : true;
+module.exports = check = (str, config) => {
+    let array = [];
+    config.forEach(item => array.push(item.join('')));
+    do {
+        array.forEach((item => str = str.replaceAll(item, '')))
+    } while (
+        str.includes('()') || str.includes('[]') || str.includes('{}') ||
+        str.includes('||') || str.includes('12') || str.includes('34') ||
+        str.includes('56') || str.includes('77') || str.includes('88')
+    )
+    return str.length === 0;
 }
